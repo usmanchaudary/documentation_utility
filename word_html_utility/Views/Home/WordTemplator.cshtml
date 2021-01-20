@@ -1,0 +1,19 @@
+﻿@model Tuple<string, string, string>
+@{ Layout = null; }
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<div> 
+    <ul>
+        <li>
+            @Model.Item1
+        </li>
+    </ul>
+    <p>
+        @Model.Item2
+    </p>
+
+    <div>
+        <p style="background-color:rgb(231, 230, 230)">
+            @Model.Item3
+        </p>
+    </div>
+</div>

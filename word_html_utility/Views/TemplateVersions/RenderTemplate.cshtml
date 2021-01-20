@@ -1,0 +1,35 @@
+﻿@model Tuple<IEnumerable<TemplateVersion>, IEnumerable<Tableofcontent>>
+@{
+    ViewData["Title"] = "RenderTemplate";
+}
+
+@foreach (var function in Model.Item1)
+{
+    <div id="@function.Id">
+        <ul>
+            <li><b>@function.FunctionName</b></li>
+        </ul>
+        <div style="margin-left:4%">
+            <p>@function.FunctionDescription</p>
+            <p style="background-color:rgb(231,230,230)">@function.FunctionExample</p>
+            @if (!string.IsNullOrWhiteSpace(function.ExampleExaplanation))
+            {
+                <p>@function.ExampleExaplanation</p>
+            }
+            @if (!string.IsNullOrWhiteSpace(function.ImagePath))
+            {
+                <img src="@Url.Content(function.ImagePath)" height="auto" width="auto" alt="Alternate Text" />
+            }
+
+            @if (function.AlternateExample != null)
+            {
+                <p style="background-color:rgb(231,230,230)">@function.AlternateExample</p>
+                <p>@function.AlternateExamplesExplanation</p>
+            }
+
+        </div>
+    </div>
+
+    <br />
+}
+

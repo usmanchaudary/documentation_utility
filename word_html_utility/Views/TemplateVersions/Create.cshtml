@@ -1,0 +1,60 @@
+﻿@model word_html_utility.Models.TemplateVersion
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>TemplateVersion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FunctionName" class="control-label"></label>
+                <input asp-for="FunctionName" class="form-control" />
+                <span asp-validation-for="FunctionName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FunctionDescription" class="control-label"></label>
+                <textarea asp-for="FunctionDescription" class="form-control" cols="10" rows="7"> </textarea>
+                <span asp-validation-for="FunctionDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FunctionExample" class="control-label"></label>
+                <textarea asp-for="FunctionExample" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="FunctionExample" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExampleExaplanation" class="control-label"></label>
+                <textarea asp-for="ExampleExaplanation" class="form-control" rows="4"> </textarea>
+                <span asp-validation-for="ExampleExaplanation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlternateExample" class="control-label"></label>
+                <textarea asp-for="AlternateExample" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="AlternateExample" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlternateExamplesExplanation" class="control-label"></label>
+                <textarea asp-for="AlternateExamplesExplanation" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="AlternateExamplesExplanation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagePath" class="control-label"></label>
+                <input type="file" asp-for="ImagePath" class="form-control"  />
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
