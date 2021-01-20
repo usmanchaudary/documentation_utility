@@ -11,7 +11,9 @@
         </ul>
         <div style="margin-left:4%">
             <p>@function.FunctionDescription</p>
-            <p style="background-color:rgb(231,230,230)">@function.FunctionExample</p>
+            
+            <pre style="background-color:rgb(231,230,230)">@String.Join(Environment.NewLine, function.FunctionExample.Split(';'))</pre>
+
             @if (!string.IsNullOrWhiteSpace(function.ExampleExaplanation))
             {
                 <p>@function.ExampleExaplanation</p>
@@ -20,11 +22,15 @@
             {
                 <img src="@Url.Content(function.ImagePath)" height="auto" width="auto" alt="Alternate Text" />
             }
-
             @if (function.AlternateExample != null)
             {
-                <p style="background-color:rgb(231,230,230)">@function.AlternateExample</p>
-                <p>@function.AlternateExamplesExplanation</p>
+                <p>@function.AlternateExample</p>
+            }
+            @if (function.AlternateExamplesExplanation != null)
+            {
+                string splited_string = String.Join(Environment.NewLine, function.AlternateExamplesExplanation.Split(';'));
+
+                <pre style="background-color:rgb(231,230,230)">@splited_string</pre>
             }
 
         </div>
