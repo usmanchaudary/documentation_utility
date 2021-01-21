@@ -18,6 +18,7 @@ namespace word_html_utility.Models
         public string FunctionDescription { get; set; }
         public string ExampleExaplanation { get; set; }
         public string AlternateExamplesExplanation { get; set; }
+        public string TableOfContentHeading { get; set; }
 
         public virtual ICollection<Tableofcontent> Tableofcontent { get; set; }
     }

@@ -54,7 +54,8 @@ namespace word_html_utility.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FunctionName,FunctionExample,AlternateExample,ImagePath,FunctionDescription,ExampleExaplanation,AlternateExamplesExplanation")] TemplateVersion templateVersion)
+        [Obsolete]
+        public async Task<IActionResult> Create([Bind("Id,FunctionName,FunctionExample,AlternateExample,ImagePath,FunctionDescription,ExampleExaplanation,AlternateExamplesExplanation,TableOfContentHeading")] TemplateVersion templateVersion)
         {
             try
             {
@@ -81,18 +82,25 @@ namespace word_html_utility.Controllers
                         templateVersion.ImagePath = relaticePath;
                     }
                 }
+
             }
             catch (Exception e)
             {
-                //Console.WriteLine(e.Message);
-                //return Content(e.Message);
+
             }
             finally
             {
                 if (ModelState.IsValid)
                 {
-                    _context.Add(templateVersion);
-                    await _context.SaveChangesAsync();
+                    if (_context.TemplateVersion.Any(x=>x.FunctionName == templateVersion.FunctionName) || _context.TemplateVersion.Any(x => x.FunctionDescription == templateVersion.FunctionDescription))
+                    {
+
+                    }
+                    else
+                    {
+                        _context.Add(templateVersion);
+                        await _context.SaveChangesAsync();
+                    }
                 }
             }
             return RedirectToAction(nameof(Index));
@@ -121,7 +129,7 @@ namespace word_html_utility.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FunctionName,FunctionExample,AlternateExample,ImagePath,FunctionDescription,ExampleExaplanation,AlternateExamplesExplanation")] TemplateVersion templateVersion)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FunctionName,FunctionExample,AlternateExample,ImagePath,FunctionDescription,ExampleExaplanation,AlternateExamplesExplanation,TableOfContentHeading")] TemplateVersion templateVersion)
         {
             if (id != templateVersion.Id)
             {

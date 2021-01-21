@@ -14,8 +14,13 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FunctionName" class="control-label"></label>
-                <input asp-for="FunctionName" class="form-control" />
+                <input asp-for="FunctionName" class="form-control"  autofocus/>
                 <span asp-validation-for="FunctionName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TableOfContentHeading" class="control-label"></label>
+                <input asp-for="TableOfContentHeading" class="form-control" />
+                <span asp-validation-for="TableOfContentHeading" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FunctionDescription" class="control-label"></label>

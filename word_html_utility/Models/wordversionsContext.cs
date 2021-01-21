@@ -59,6 +59,8 @@ namespace word_html_utility.Models
                 entity.Property(e => e.FunctionName).HasColumnName("function_name");
 
                 entity.Property(e => e.ImagePath).HasColumnName("image_path");
+
+                entity.Property(e => e.TableOfContentHeading).HasColumnName("Table_of_content_heading");
             });
 
             OnModelCreatingPartial(modelBuilder);

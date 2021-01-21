@@ -3,39 +3,124 @@
     ViewData["Title"] = "RenderTemplate";
 }
 
-@foreach (var function in Model.Item1)
-{
-    <div id="@function.Id">
-        <ul>
-            <li><b>@function.FunctionName</b></li>
-        </ul>
-        <div style="margin-left:4%">
-            <p>@function.FunctionDescription</p>
-            
-            <pre style="background-color:rgb(231,230,230)">@String.Join(Environment.NewLine, function.FunctionExample.Split(';'))</pre>
+<style>
+    a {
+        color: #1a1a1a;
+    }
 
-            @if (!string.IsNullOrWhiteSpace(function.ExampleExaplanation))
-            {
-                <p>@function.ExampleExaplanation</p>
-            }
-            @if (!string.IsNullOrWhiteSpace(function.ImagePath))
-            {
-                <img src="@Url.Content(function.ImagePath)" height="auto" width="auto" alt="Alternate Text" />
-            }
-            @if (function.AlternateExample != null)
-            {
-                <p>@function.AlternateExample</p>
-            }
-            @if (function.AlternateExamplesExplanation != null)
-            {
-                string splited_string = String.Join(Environment.NewLine, function.AlternateExamplesExplanation.Split(';'));
+    @@media print {
+        .noprint {
+            visibility: hidden;
+        }
 
-                <pre style="background-color:rgb(231,230,230)">@splited_string</pre>
-            }
+        a {
+            color: #1a1a1a;
+            text-decoration: none
+        }
 
+            a:hover {
+                color: #1a1a1a;
+                text-decoration: none;
+            }
+    }
+
+    a:hover {
+        color: #1a1a1a;
+        text-decoration: none;
+    }
+</style>
+<div id="main">
+
+    <h1>
+        TABLE OF CONTENT
+    </h1>
+    @{
+        int count = 1;
+    }
+    @foreach (var heading in Model.Item1)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="#@heading.Id" class="nohoverunderline"><p class="text-left"> @heading.TableOfContentHeading </p></a>
+                </div>
+                <div class="col-md-6">
+                    <p class="">
+                        ....................................................................................................................................................................................
+                    </p>
+                </div>
+                <div class="col-md-2">
+
+                    <p class="text-right">
+                        @count
+
+                    </p>
+                </div>
+
+            </div>
         </div>
-    </div>
+        count++;
+    }
+    <p style="page-break-before:always">
 
-    <br />
-}
+    </p>
 
+
+
+
+    @foreach (var function in Model.Item1)
+    {
+
+
+
+        <div id="@function.Id">
+            <ul>
+                <li><b>@function.FunctionName</b></li>
+            </ul>
+            <div style="margin-left:4%">
+                <p>@function.FunctionDescription</p>
+
+                <pre style="background-color:rgb(231,230,230)">@String.Join(Environment.NewLine, function.FunctionExample.Split(';'))</pre>
+
+                @if (!string.IsNullOrWhiteSpace(function.ExampleExaplanation))
+                {
+                    <p>@function.ExampleExaplanation</p>
+                }
+                @if (!string.IsNullOrWhiteSpace(function.ImagePath))
+                {
+                    <img src="@Url.Content(function.ImagePath)" height="auto" width="auto" alt="Alternate Text" />
+                }
+                @if (function.AlternateExample != null)
+                {
+                    if (function.AlternateExample.Contains("-"))
+                    {
+                        string[] splitted = function.AlternateExample.Split('-');
+                        <p>@splitted.First()</p>
+                        <p style="background-color:rgb(231,230,230)">@splitted.Last()</p>
+                    }
+                    else
+                    {
+                        <p>@function.AlternateExample</p>
+                    }
+                }
+                @if (function.AlternateExamplesExplanation != null)
+                {
+                    string splited_string = String.Join(Environment.NewLine, function.AlternateExamplesExplanation.Split(';'));
+
+                    <pre style="background-color:rgb(231,230,230)">@splited_string</pre>
+                }
+
+            </div>
+        </div>
+
+        <br />
+    }
+    <button class="btn btn-primary noprint float-right" onclick="printout()"> Print</button>
+</div>
+
+
+<script>
+    function printout() {
+        window.print();
+    }
+</script>
