@@ -2,6 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
+// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+// If you have enabled NRTs for your project, then un-comment the following line:
+// #nullable disable
+
 namespace word_html_utility.Models
 {
     public partial class wordversionsContext : DbContext
@@ -17,13 +21,14 @@ namespace word_html_utility.Models
 
         public virtual DbSet<Tableofcontent> Tableofcontent { get; set; }
         public virtual DbSet<TemplateVersion> TemplateVersion { get; set; }
+        public virtual DbSet<Versions> Versions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=desktop-vd5sscb;Initial Catalog=wordversions;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Server=desktop-vd5sscb;Database=wordversions;Trusted_Connection=True;");
             }
         }
 
@@ -61,6 +66,13 @@ namespace word_html_utility.Models
                 entity.Property(e => e.ImagePath).HasColumnName("image_path");
 
                 entity.Property(e => e.TableOfContentHeading).HasColumnName("Table_of_content_heading");
+
+                entity.Property(e => e.VersionId).HasColumnName("version_id");
+
+                entity.HasOne(d => d.Version)
+                    .WithMany(p => p.TemplateVersion)
+                    .HasForeignKey(d => d.VersionId)
+                    .HasConstraintName("FK_TemplateVersion_Versions");
             });
 
             OnModelCreatingPartial(modelBuilder);

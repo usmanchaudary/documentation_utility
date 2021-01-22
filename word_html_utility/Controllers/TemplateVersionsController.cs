@@ -13,6 +13,7 @@ namespace word_html_utility.Controllers
 {
     public class TemplateVersionsController : Controller
     {
+        //Scaffold-DbContext "Server=desktop-vd5sscb;Database=wordversions;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -f
         //ease is a greater threat to progress then hardship
         private readonly wordversionsContext _context;
         [Obsolete]
@@ -27,7 +28,7 @@ namespace word_html_utility.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TemplateVersion.ToListAsync());
+            return View(await _context.TemplateVersion.Include(x=>x.Version).ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -59,7 +60,6 @@ namespace word_html_utility.Controllers
         {
             try
             {
-
                 var file = Request.Form.Files[0];
                 var folder = Path.Combine(_environment.WebRootPath, "images/");
                 if (!Directory.Exists(folder))

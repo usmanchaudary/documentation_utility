@@ -27,6 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.FunctionDescription)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Version.VersionNumber)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -59,7 +62,9 @@
                         @Html.DisplayFor(modelItem => item.FunctionDescription)
                     }
                 </td>
-
+                <td>
+                    @item.Version.VersionNumber
+                </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
